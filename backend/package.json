@@ -5,8 +5,8 @@
     "scripts": {
         "inst": "npm install",
         "dev": "nodemon",
-        "build:tsc": "tsc && tsc-alias",
-        "build": "tsc && tsc-alias",
+        "build:tsc": "tsc && npx tsc-alias",
+        "build": "tsc && npx tsc-alias",
         "start": "node dist/server.js",
         "lint": "eslint ./app  --ext .ts",
         "lint:fix": "eslint ./app --ext .ts --fix"
