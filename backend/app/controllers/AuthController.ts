@@ -2,7 +2,7 @@ import { RESPONSE_CODE, RESPONSE_FAILURE, RESPONSE_SUCCESS } from '@common/Const
 import { locale } from '@config/locales';
 import { sendResponse } from '@utils/common';
 import { logger } from '@utils/logger';
-import { NextFunction, Request, Response } from 'express';
+import type { NextFunction, Request, Response } from 'express';
 import UserService from '@services/UserService';
 
 class AuthController {

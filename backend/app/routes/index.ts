@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import type { Request, Response } from 'express';
 import { IRoutes } from '@common/interfaces/IRoutes';
 import AuthController from '@controllers/AuthController';
 import NotesController from '@controllers/NotesController';
@@ -17,7 +18,7 @@ export class IndexRoute implements IRoutes {
 
     initRoutes(): void {
         // Health check route
-        this.router.get('/health', (req, res) => {
+        this.router.get('/health', (req: Request, res: Response) => {
             res.status(200).json({ 
                 success: true, 
                 message: 'Secure Notes API is running',

@@ -7,7 +7,8 @@ import { initializeLogger, logger } from '@utils/logger';
 import bodyParser from 'body-parser';
 import compression from 'compression';
 import cors from 'cors';
-import express, { Application, NextFunction, Request, Response } from 'express';
+import express from 'express';
+import type { Application, NextFunction, Request, Response } from 'express';
 import helmet from 'helmet';
 import hpp from 'hpp';
 import * as http from 'http';
@@ -67,12 +68,12 @@ export default class App {
                 credentials: true,
             })
         );
-        this.app.use(hpp());
+        this.app.use(hpp({}));
         this.app.use(helmet());
         this.app.use(compression());
 
         // Body parsing middleware
-        this.app.use(bodyParser.json({ limit: '2mb' }));
+        this.app.use(express.json({ limit: '2mb' }));
         this.app.use(
             express.urlencoded({
                 limit: '3mb',

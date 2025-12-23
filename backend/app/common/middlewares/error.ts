@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from 'express';
+import type { NextFunction, Request, Response } from 'express';
 import { HttpException } from '@common/exceptions/HttpException';
 import { logger } from '@utils/logger';
 import { RESPONSE_CODE, RESPONSE_FAILURE } from '@common/Constants';

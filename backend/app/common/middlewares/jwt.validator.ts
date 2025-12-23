@@ -3,7 +3,7 @@ import { locale } from '@config/locales';
 import { sendResponse } from '@utils/common';
 import jwt from 'jsonwebtoken';
 import { RESPONSE_CODE, RESPONSE_FAILURE } from '@common/Constants';
-import { NextFunction, Response } from 'express';
+import type { NextFunction, Response } from 'express';
 import { IAuthRequest } from '@common/interfaces/IAuthRequest';
 import UserService from '@services/UserService';
 

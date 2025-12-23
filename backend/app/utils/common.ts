@@ -3,7 +3,7 @@
  ******************************************* */
 import { ILooseObject } from '@common/interfaces/ILooseObject';
 import { IResponse } from '@common/interfaces/IResponse';
-import { Response } from 'express';
+import type { Response } from 'express';
 
 export async function randString(x: number): Promise<string> {
     let s = '';

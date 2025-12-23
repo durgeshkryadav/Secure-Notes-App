@@ -4,7 +4,7 @@ import { locale } from '@config/locales';
 import { sendResponse } from '@utils/common';
 import { logger } from '@utils/logger';
 import { isObjectId } from '@utils/util';
-import { Response } from 'express';
+import type { Response } from 'express';
 import NotesService from '@services/NotesService';
 import { Types } from 'mongoose';
 

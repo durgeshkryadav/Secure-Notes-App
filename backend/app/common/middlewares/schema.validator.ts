@@ -1,5 +1,5 @@
 import { validationResult } from 'express-validator';
-import { NextFunction, Request, Response } from 'express';
+import type { NextFunction, Request, Response } from 'express';
 import { sendResponse } from '@utils/common';
 import { RESPONSE_CODE, RESPONSE_FAILURE } from '@common/Constants';
 import { locale } from '@config/locales';

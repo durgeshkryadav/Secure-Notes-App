@@ -1,6 +1,6 @@
 import winston from 'winston';
 import { CONF_ENV } from '@config/config';
-import { Application } from 'express';
+import type { Application } from 'express';
 import morgan from 'morgan';
 
 const levels = {
@@ -54,7 +54,7 @@ const morganFormat = ':method :url :status :res[content-length] - :response-time
 
 export const morganMiddleware = morgan(morganFormat, {
     stream: {
-        write: (message) => {
+        write: (message: string) => {
             logger.http(message.trim());
         },
     },
