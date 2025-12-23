@@ -15,10 +15,10 @@ const Footer: React.FC = () => {
     >
       <Container maxWidth="lg">
         <Typography variant="body2" color="text.secondary" align="center" sx={{ mb: 1 }}>
-          <strong>GD OFFICE:</strong> UNIT NO. 405, 4th FLOOR, TOWER A, UNITECH CYBER PARK, SECTOR 39, GURGAON-122003
+          © {new Date().getFullYear()} All Rights Reserved. NITS Solutions (India) Pvt Ltd | www.nits.ai
         </Typography>
         <Typography variant="body2" color="text.secondary" align="center">
-          © {new Date().getFullYear()} NITS Solutions (India) Pvt Ltd | www.nits.ai
+          <strong>GD OFFICE:</strong> UNIT NO. 405, 4th FLOOR, TOWER A, UNITECH CYBER PARK, SECTOR 39, GURGAON-122003
         </Typography>
       </Container>
     </Box>
