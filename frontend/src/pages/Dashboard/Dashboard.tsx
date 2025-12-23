@@ -11,20 +11,21 @@ import {
   IconButton,
   Card,
   CardContent,
-  CardActions,
-  Grid,
   CircularProgress,
   Alert,
   Dialog,
   DialogTitle,
   DialogContent,
   DialogActions,
+  InputAdornment,
 } from '@mui/material';
 import {
   LogoutOutlined,
   DeleteOutline,
   AddOutlined,
   NoteOutlined,
+  SearchOutlined,
+  AccountCircle,
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
@@ -53,6 +54,8 @@ const Dashboard: React.FC = () => {
   const [validationError, setValidationError] = useState('');
   const [selectedNote, setSelectedNote] = useState<string | null>(null);
   const [viewDialogOpen, setViewDialogOpen] = useState(false);
+  const [addNoteDialogOpen, setAddNoteDialogOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   // Fetch notes on mount
   useEffect(() => {
@@ -105,9 +108,22 @@ const Dashboard: React.FC = () => {
       await dispatch(createNote(newNote)).unwrap();
       setNewNote({ title: '', content: '' });
       setValidationError('');
+      setAddNoteDialogOpen(false);
     } catch (err) {
       console.error('Failed to create note:', err);
     }
+  };
+
+  const handleOpenAddDialog = () => {
+    setAddNoteDialogOpen(true);
+    setValidationError('');
+    setNewNote({ title: '', content: '' });
+  };
+
+  const handleCloseAddDialog = () => {
+    setAddNoteDialogOpen(false);
+    setValidationError('');
+    setNewNote({ title: '', content: '' });
   };
 
   const handleDeleteNote = async (noteId: string) => {
@@ -132,34 +148,43 @@ const Dashboard: React.FC = () => {
 
   const getSelectedNoteData = () => {
     if (!selectedNote) return null;
-    return notes.find((note: Note) => note._id === selectedNote);
+    return notes.find((note) => note._id === selectedNote);
   };
 
   const selectedNoteData = getSelectedNoteData();
 
+  // Filter notes based on search query
+  const filteredNotes = notes.filter((note) => {
+    if (!searchQuery) return true;
+    const decryptedContent = getDecryptedContent(note.content);
+    return (
+      note.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      decryptedContent.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  });
+
   return (
     <Box sx={{ minHeight: '100vh', backgroundColor: '#f5f5f5' }}>
       {/* App Bar */}
-      <AppBar position="static">
+      <AppBar position="static" elevation={0}>
         <Toolbar>
           <NoteOutlined sx={{ mr: 2 }} />
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Secure Notes
           </Typography>
-          <Typography variant="body2" sx={{ mr: 2 }}>
-            {user?.email}
-          </Typography>
           <Button
             color="inherit"
             startIcon={<LogoutOutlined />}
+            endIcon={<AccountCircle sx={{ fontSize: 32 }} />}
             onClick={handleLogout}
+            sx={{ textTransform: 'none' }}
           >
             Logout
           </Button>
         </Toolbar>
       </AppBar>
 
-      <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+      <Container maxWidth="md" sx={{ mt: 4, mb: 4 }}>
         {/* Error Alert */}
         {error && (
           <Alert severity="error" sx={{ mb: 3 }} onClose={() => dispatch(clearNotesError())}>
@@ -167,70 +192,47 @@ const Dashboard: React.FC = () => {
           </Alert>
         )}
 
-        {/* Add Note Section */}
-        <Paper elevation={3} sx={{ p: 3, mb: 4 }}>
-          <Typography variant="h6" gutterBottom>
-            Create New Note
-          </Typography>
-          
-          {validationError && (
-            <Alert severity="error" sx={{ mb: 2 }}>
-              {validationError}
-            </Alert>
-          )}
-
-          <TextField
-            fullWidth
-            label="Title"
-            name="title"
-            value={newNote.title}
-            onChange={handleInputChange}
-            margin="normal"
-            disabled={loading}
-          />
-
-          <TextField
-            fullWidth
-            label="Content"
-            name="content"
-            value={newNote.content}
-            onChange={handleInputChange}
-            margin="normal"
-            multiline
-            rows={4}
-            disabled={loading}
-          />
-
+        {/* Action Bar */}
+        <Box sx={{ display: 'flex', gap: 2, mb: 3 }}>
           <Button
             variant="contained"
             startIcon={<AddOutlined />}
-            onClick={handleAddNote}
-            sx={{ mt: 2 }}
-            disabled={loading}
+            onClick={handleOpenAddDialog}
+            sx={{ textTransform: 'none' }}
           >
-            {loading ? 'Adding...' : 'Add Note'}
+            Add Note
           </Button>
-        </Paper>
+          <TextField
+            placeholder="Search"
+            size="small"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchOutlined />
+                </InputAdornment>
+              ),
+            }}
+            sx={{ flexGrow: 1 }}
+          />
+        </Box>
 
         {/* Notes List */}
         <Box>
-          <Typography variant="h5" gutterBottom sx={{ mb: 3 }}>
-            My Notes ({notes.length})
-          </Typography>
-
           {loading && notes.length === 0 ? (
             <Box sx={{ display: 'flex', justifyContent: 'center', py: 4 }}>
               <CircularProgress />
             </Box>
-          ) : notes.length === 0 ? (
+          ) : filteredNotes.length === 0 ? (
             <Paper sx={{ p: 4, textAlign: 'center' }}>
               <Typography variant="body1" color="text.secondary">
-                No notes yet. Create your first secure note above!
+                {searchQuery ? 'No notes found matching your search.' : 'No notes yet. Click "Add Note" to create your first secure note!'}
               </Typography>
             </Paper>
           ) : (
-            <Grid container spacing={3}>
-              {notes.map((note: Note) => {
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+              {filteredNotes.map((note: Note) => {
                 let decryptedContent = '';
                 try {
                   decryptedContent = getDecryptedContent(note.content);
@@ -239,55 +241,97 @@ const Dashboard: React.FC = () => {
                 }
 
                 return (
-                  <Grid item xs={12} sm={6} md={4} key={note._id}>
-                    <Card
-                      sx={{
-                        height: '100%',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        cursor: 'pointer',
-                        '&:hover': {
-                          boxShadow: 6,
-                        },
+                  <Paper
+                    key={note._id}
+                    sx={{
+                      p: 2,
+                      cursor: 'pointer',
+                      '&:hover': {
+                        boxShadow: 3,
+                      },
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'flex-start',
+                    }}
+                    onClick={() => handleViewNote(note._id)}
+                  >
+                    <Box sx={{ flexGrow: 1 }}>
+                      <Typography variant="h6" gutterBottom>
+                        {note.title}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {truncateText(decryptedContent, 80)}
+                      </Typography>
+                    </Box>
+                    <IconButton
+                      size="small"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDeleteNote(note._id);
                       }}
-                      onClick={() => handleViewNote(note._id)}
+                      disabled={loading}
+                      sx={{ ml: 2 }}
                     >
-                      <CardContent sx={{ flexGrow: 1 }}>
-                        <Typography variant="h6" gutterBottom noWrap>
-                          {note.title}
-                        </Typography>
-                        <Typography
-                          variant="body2"
-                          color="text.secondary"
-                          sx={{ mb: 2 }}
-                        >
-                          {truncateText(decryptedContent, 100)}
-                        </Typography>
-                        <Typography variant="caption" color="text.secondary">
-                          {formatDate(note.createdAt)}
-                        </Typography>
-                      </CardContent>
-                      <CardActions>
-                        <IconButton
-                          size="small"
-                          color="error"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleDeleteNote(note._id);
-                          }}
-                          disabled={loading}
-                        >
-                          <DeleteOutline />
-                        </IconButton>
-                      </CardActions>
-                    </Card>
-                  </Grid>
+                      <DeleteOutline />
+                    </IconButton>
+                  </Paper>
                 );
               })}
-            </Grid>
+            </Box>
           )}
         </Box>
       </Container>
+
+      {/* Add Note Dialog */}
+      <Dialog
+        open={addNoteDialogOpen}
+        onClose={handleCloseAddDialog}
+        maxWidth="sm"
+        fullWidth
+      >
+        <DialogTitle>Add New Note</DialogTitle>
+        <DialogContent>
+          {validationError && (
+            <Alert severity="error" sx={{ mb: 2 }}>
+              {validationError}
+            </Alert>
+          )}
+          <TextField
+            fullWidth
+            label="Title"
+            name="title"
+            value={newNote.title}
+            onChange={handleInputChange}
+            margin="normal"
+            disabled={loading}
+            autoFocus
+          />
+          <TextField
+            fullWidth
+            label="Content"
+            name="content"
+            value={newNote.content}
+            onChange={handleInputChange}
+            margin="normal"
+            multiline
+            rows={6}
+            disabled={loading}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseAddDialog} disabled={loading}>
+            Cancel
+          </Button>
+          <Button
+            onClick={handleAddNote}
+            variant="contained"
+            disabled={loading}
+            startIcon={loading ? <CircularProgress size={20} /> : <AddOutlined />}
+          >
+            {loading ? 'Adding...' : 'Add Note'}
+          </Button>
+        </DialogActions>
+      </Dialog>
 
       {/* View Note Dialog */}
       <Dialog

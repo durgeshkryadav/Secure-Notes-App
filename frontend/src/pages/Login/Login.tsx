@@ -10,7 +10,6 @@ import {
   Link,
   CircularProgress,
 } from '@mui/material';
-import { LockOutlined } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { loginUser, clearError } from '../../redux/slices/auth.slice';
@@ -112,26 +111,43 @@ const Login: React.FC = () => {
             flexDirection: 'column',
             alignItems: 'center',
             width: '100%',
+            borderRadius: 2,
           }}
         >
-          <Box
-            sx={{
-              backgroundColor: 'primary.main',
-              borderRadius: '50%',
-              padding: 1,
-              marginBottom: 2,
-            }}
-          >
-            <LockOutlined sx={{ color: 'white', fontSize: 32 }} />
+          <Typography component="h1" variant="h5" fontWeight="bold" sx={{ mb: 3 }}>
+            Secure Notes
+          </Typography>
+
+          <Box sx={{ display: 'flex', mb: 3, width: '100%' }}>
+            <Button
+              variant="contained"
+              fullWidth
+              sx={{ 
+                textTransform: 'none',
+                fontWeight: 600,
+                py: 1,
+                borderTopRightRadius: 0,
+                borderBottomRightRadius: 0,
+              }}
+            >
+              Login
+            </Button>
+            <Button
+              variant="outlined"
+              fullWidth
+              sx={{ 
+                textTransform: 'none',
+                fontWeight: 600,
+                py: 1,
+                borderTopLeftRadius: 0,
+                borderBottomLeftRadius: 0,
+                borderLeft: 'none',
+              }}
+              onClick={() => navigate(ROUTES.REGISTER)}
+            >
+              Register
+            </Button>
           </Box>
-
-          <Typography component="h1" variant="h5" gutterBottom>
-            Sign In
-          </Typography>
-
-          <Typography variant="body2" color="text.secondary" align="center" sx={{ mb: 3 }}>
-            Sign in to access your secure notes
-          </Typography>
 
           {error && (
             <Alert severity="error" sx={{ width: '100%', mb: 2 }}>
@@ -140,12 +156,13 @@ const Login: React.FC = () => {
           )}
 
           <Box component="form" onSubmit={handleSubmit} sx={{ width: '100%' }}>
+            <Typography variant="body2" sx={{ mb: 1, fontWeight: 500 }}>
+              Email
+            </Typography>
             <TextField
-              margin="normal"
               required
               fullWidth
               id="email"
-              label="Email Address"
               name="email"
               autoComplete="email"
               autoFocus
@@ -154,14 +171,17 @@ const Login: React.FC = () => {
               error={!!validationErrors.email}
               helperText={validationErrors.email}
               disabled={loading}
+              size="small"
+              sx={{ mb: 2 }}
             />
 
+            <Typography variant="body2" sx={{ mb: 1, fontWeight: 500 }}>
+              Password
+            </Typography>
             <TextField
-              margin="normal"
               required
               fullWidth
               name="password"
-              label="Password"
               type="password"
               id="password"
               autoComplete="current-password"
@@ -170,30 +190,29 @@ const Login: React.FC = () => {
               error={!!validationErrors.password}
               helperText={validationErrors.password}
               disabled={loading}
+              size="small"
+              sx={{ mb: 3 }}
             />
 
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2, py: 1.5 }}
+              sx={{ mb: 2, py: 1.2, textTransform: 'none', fontWeight: 600 }}
               disabled={loading}
             >
-              {loading ? <CircularProgress size={24} /> : 'Sign In'}
+              {loading ? <CircularProgress size={24} /> : 'Login'}
             </Button>
 
             <Box sx={{ textAlign: 'center' }}>
-              <Typography variant="body2">
-                Don't have an account?{' '}
-                <Link
-                  component="button"
-                  variant="body2"
-                  onClick={() => navigate(ROUTES.REGISTER)}
-                  sx={{ cursor: 'pointer' }}
-                >
-                  Sign Up
-                </Link>
-              </Typography>
+              <Link
+                component="button"
+                variant="body2"
+                type="button"
+                sx={{ cursor: 'pointer', textDecoration: 'none', color: 'text.secondary' }}
+              >
+                Forgot password?
+              </Link>
             </Box>
           </Box>
         </Paper>
