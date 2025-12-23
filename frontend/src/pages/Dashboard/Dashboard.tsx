@@ -38,6 +38,7 @@ import {
 import { formatDate, truncateText } from '../../utils/helpers';
 import { ROUTES } from '../../constants';
 import { Note } from '../../interface/notes.interface';
+import { Footer } from '../../components';
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
@@ -367,6 +368,7 @@ const Dashboard: React.FC = () => {
           </>
         )}
       </Dialog>
+      <Footer />
     </Box>
   );
 };

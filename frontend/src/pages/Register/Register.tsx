@@ -16,6 +16,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { registerUser, clearError } from '../../redux/slices/auth.slice';
 import { isValidEmail, isValidPassword } from '../../utils/helpers';
 import { ROUTES } from '../../constants';
+import { Footer } from '../../components';
 
 const Register: React.FC = () => {
   const navigate = useNavigate();
@@ -119,15 +120,16 @@ const Register: React.FC = () => {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <Box
-        sx={{
-          marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <Container component="main" maxWidth="xs" sx={{ flex: 1 }}>
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
         <Paper
           elevation={3}
           sx={{
@@ -244,7 +246,9 @@ const Register: React.FC = () => {
           </Box>
         </Paper>
       </Box>
-    </Container>
+      </Container>
+      <Footer />
+    </Box>
   );
 };
 
