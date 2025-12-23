@@ -9,8 +9,6 @@ import {
   Paper,
   TextField,
   IconButton,
-  Card,
-  CardContent,
   CircularProgress,
   Alert,
   Dialog,
@@ -44,7 +42,6 @@ import { Note } from '../../interface/notes.interface';
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { user } = useAppSelector((state) => state.auth);
   const { notes, loading, error } = useAppSelector((state) => state.notes);
 
   const [newNote, setNewNote] = useState({
