@@ -38,7 +38,7 @@ export default class App {
     public async start(): Promise<void> {
         this.server = this.app.listen(this.port, () => {
             logger.info(`==========================================`);
-            logger.info(`🚀 Secure Notes API (${this.env}) listening on port ${this.port}`);
+            logger.info(` Secure Notes API (${this.env}) listening on port ${this.port}`);
             logger.info(`==========================================`);
         });
     }

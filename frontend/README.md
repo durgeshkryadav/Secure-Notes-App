@@ -2,7 +2,7 @@
 
 A secure, encrypted notes application built with React, TypeScript, and Material-UI.
 
-## 🚀 Features
+##  Features
 
 - **User Authentication**: Secure login and registration
 - **JWT Token Management**: Automatic token handling and refresh
@@ -12,7 +12,7 @@ A secure, encrypted notes application built with React, TypeScript, and Material
 - **State Management**: Redux Toolkit for predictable state updates
 - **Protected Routes**: Secure routing with authentication checks
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 - **React 18** - UI library
 - **TypeScript** - Type safety
@@ -23,7 +23,7 @@ A secure, encrypted notes application built with React, TypeScript, and Material
 - **CryptoJS** - AES encryption
 - **Vite** - Build tool
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 src/
@@ -54,7 +54,7 @@ src/
 └── main.tsx           # Entry point
 ```
 
-## 🔧 Installation
+##  Installation
 
 1. **Install dependencies:**
    ```bash
@@ -66,7 +66,7 @@ src/
    The app is configured to proxy API requests to `http://localhost:5000`. 
    Make sure your backend is running on port 5000.
 
-## 🚀 Running the Application
+##  Running the Application
 
 ### Development Mode
 ```bash
@@ -89,7 +89,7 @@ npm run preview
 npm run lint
 ```
 
-## 🔐 Security Features
+##  Security Features
 
 ### Client-Side Encryption
 All note content is encrypted using AES-256 before being sent to the backend:
@@ -106,7 +106,7 @@ All note content is encrypted using AES-256 before being sent to the backend:
 - Dashboard accessible only to authenticated users
 - Automatic redirect to login for unauthenticated access
 
-## 📡 API Integration
+##  API Integration
 
 The frontend consumes the following backend endpoints:
 
@@ -121,7 +121,7 @@ The frontend consumes the following backend endpoints:
 
 All notes endpoints require JWT token in Authorization header.
 
-## 🎨 Features Breakdown
+##  Features Breakdown
 
 ### Login Page
 - Email and password validation
@@ -143,7 +143,7 @@ All notes endpoints require JWT token in Authorization header.
 - **View Dialog**: Full note view with encrypted content decryption
 - **Delete Function**: Confirmation before deletion
 
-## 🔄 State Management
+##  State Management
 
 Redux slices:
 - **authSlice**: Manages authentication state, login, register, logout
@@ -151,13 +151,13 @@ Redux slices:
 
 All async operations use Redux Toolkit's `createAsyncThunk` for proper loading and error states.
 
-## 💾 Data Persistence
+##  Data Persistence
 
 - JWT token persists in localStorage
 - User data persists in localStorage
 - Auto-restore authentication on page reload
 
-## 🎯 TypeScript
+##  TypeScript
 
 Fully typed with strict mode enabled:
 - No `any` types used
@@ -165,21 +165,21 @@ Fully typed with strict mode enabled:
 - Type-safe Redux hooks
 - Type-safe API responses
 
-## 🔍 Code Quality
+##  Code Quality
 
 - ESLint configured for React and TypeScript
 - Strict TypeScript compiler options
 - Component-based architecture
 - Separation of concerns (utils, components, pages)
 
-## 🌐 Browser Support
+##  Browser Support
 
 - Chrome (latest)
 - Firefox (latest)
 - Safari (latest)
 - Edge (latest)
 
-## 📝 Notes
+##  Notes
 
 1. **Encryption Key**: Currently hardcoded in constants. In production, this should be user-specific or derived from user password.
 
@@ -187,14 +187,10 @@ Fully typed with strict mode enabled:
 
 3. **Error Handling**: All API errors are caught and displayed to users via Material-UI Alerts.
 
-## 🤝 Contributing
+##  Contributing
 
 Follow the existing architecture pattern:
 - Use TypeScript with strict typing
 - Follow Material-UI component patterns
 - Use Redux Toolkit for state management
 - Keep components small and focused
-
-## 📄 License
-
-This project is part of the Secure Notes App assignment.
