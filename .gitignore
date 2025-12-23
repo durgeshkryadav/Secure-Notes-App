@@ -87,9 +87,3 @@ frontend/dist/
 frontend/build/
 frontend/node_modules/
 frontend/.env
-
-# Package manager lock files (optional)
-# Uncomment to ignore lock files
-# package-lock.json
-# yarn.lock
-# pnpm-lock.yaml

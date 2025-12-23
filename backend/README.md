@@ -2,7 +2,7 @@
 
 A production-ready RESTful API for secure note management with JWT authentication, AES encryption, and enterprise-grade security features built with TypeScript, Express.js, and MongoDB.
 
-## 🚀 Features
+## Features
 
 ### Core Functionality
 - **User Authentication**: JWT-based authentication with secure token generation and validation
@@ -29,7 +29,7 @@ A production-ready RESTful API for secure note management with JWT authenticatio
 - **Request Compression**: gzip compression for API responses
 - **Path Aliases**: Clean import statements with TypeScript path mapping
 
-## 📋 Tech Stack
+## Tech Stack
 
 - **Runtime**: Node.js
 - **Framework**: Express.js 4.18
@@ -42,7 +42,7 @@ A production-ready RESTful API for secure note management with JWT authenticatio
 - **Logging**: Winston 3.11
 - **Security**: Helmet, HPP, CORS
 
-## 🛠️ Installation
+## Installation
 
 ### Prerequisites
 - Node.js (v16 or higher)
@@ -96,7 +96,7 @@ npm run build
 npm start
 ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 backend/
@@ -152,7 +152,7 @@ backend/
 └── README.md                      # This file
 ```
 
-## 🔌 API Endpoints
+## API Endpoints
 
 ### Base URL
 ```
@@ -319,7 +319,7 @@ Authorization: Bearer <jwt_token>
 
 ---
 
-## 🔐 Security Implementation
+## Security Implementation
 
 ### Password Security
 - **bcrypt Hashing**: Automatic password hashing with 10 salt rounds
@@ -346,7 +346,7 @@ Authorization: Bearer <jwt_token>
 - **Compression**: gzip compression for responses
 - **Rate Limiting**: Can be added via express-rate-limit
 
-## 🐛 Error Handling
+## Error Handling
 
 ### Centralized Error Middleware
 All errors are caught and formatted consistently:
@@ -367,7 +367,7 @@ All errors are caught and formatted consistently:
 - `404` - Not Found
 - `500` - Internal Server Error
 
-## 📝 Logging
+## Logging
 
 ### Winston Logger Configuration
 - **Console Transport**: Development logging
@@ -380,7 +380,7 @@ All errors are caught and formatted consistently:
 - `logs/combined.log` - All log levels
 - Auto-rotation and compression supported
 
-## 🧪 Development
+## Development
 
 ### NPM Scripts
 ```bash
@@ -403,7 +403,7 @@ npm run lint:fix    # Auto-fix linting issues
 ### Nodemon Configuration
 Watches `.ts` files and auto-restarts on changes in development.
 
-## 🚀 Deployment
+## Deployment
 
 ### Environment Variables (Production)
 Ensure these are set in your hosting environment:
@@ -430,7 +430,7 @@ npm start
 - **Connection Pooling**: Mongoose handles automatically
 - **Indexes**: Optimized for user queries and search
 
-## 📄 License
+## License
 
 This project is part of NITS Solutions (India) Pvt Ltd portfolio.
 
@@ -438,10 +438,10 @@ This project is part of NITS Solutions (India) Pvt Ltd portfolio.
 
 © 2025 All Rights Reserved. NITS Solutions (India) Pvt Ltd | www.nits.ai
 
-## 🤝 Contributing
+## Contributing
 
 For internal development only. Contact the development team for contribution guidelines.
 
-## 📧 Support
+## Support
 
 For issues or questions, contact the development team or create an issue in the repository.
