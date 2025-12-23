@@ -337,29 +337,74 @@ const Dashboard: React.FC = () => {
         onClose={handleCloseDialog}
         maxWidth="md"
         fullWidth
+        PaperProps={{
+          sx: {
+            borderRadius: 2,
+            boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
+          }
+        }}
       >
         {selectedNoteData && (
           <>
-            <DialogTitle>{selectedNoteData.title}</DialogTitle>
-            <DialogContent>
-              <Typography variant="body1" sx={{ whiteSpace: 'pre-wrap', mt: 2 }}>
+            <DialogTitle sx={{ 
+              borderBottom: '1px solid #e0e0e0', 
+              pb: 2,
+              backgroundColor: '#f8f9fa'
+            }}>
+              <Typography variant="h5" component="div" sx={{ fontWeight: 700, color: '#1a1a1a' }}>
+                {selectedNoteData.title}
+              </Typography>
+              <Box sx={{ display: 'flex', gap: 2, mt: 1.5 }}>
+                <Typography variant="caption" color="text.secondary" sx={{ display: 'flex', alignItems: 'center' }}>
+                  <strong>Created:</strong>&nbsp;{formatDate(selectedNoteData.createdAt)}
+                </Typography>
+                <Typography variant="caption" color="text.secondary" sx={{ display: 'flex', alignItems: 'center' }}>
+                  <strong>Updated:</strong>&nbsp;{formatDate(selectedNoteData.updatedAt)}
+                </Typography>
+              </Box>
+            </DialogTitle>
+            <DialogContent sx={{ mt: 3, pb: 3 }}>
+              <Typography 
+                variant="body1" 
+                sx={{ 
+                  whiteSpace: 'pre-wrap',
+                  lineHeight: 1.8,
+                  color: '#424242',
+                  fontSize: '1rem'
+                }}
+              >
                 {getDecryptedContent(selectedNoteData.content)}
               </Typography>
-              <Typography variant="caption" color="text.secondary" sx={{ mt: 2, display: 'block' }}>
-                Created: {formatDate(selectedNoteData.createdAt)}
-              </Typography>
-              <Typography variant="caption" color="text.secondary">
-                Updated: {formatDate(selectedNoteData.updatedAt)}
-              </Typography>
             </DialogContent>
-            <DialogActions>
-              <Button onClick={handleCloseDialog}>Close</Button>
+            <DialogActions sx={{ 
+              borderTop: '1px solid #e0e0e0', 
+              px: 3, 
+              py: 2,
+              backgroundColor: '#fafafa'
+            }}>
+              <Button 
+                onClick={handleCloseDialog}
+                variant="outlined"
+                sx={{ 
+                  textTransform: 'none',
+                  fontWeight: 600,
+                  px: 3
+                }}
+              >
+                Cancel
+              </Button>
               <Button
                 color="error"
+                variant="contained"
                 startIcon={<DeleteOutline />}
                 onClick={() => {
                   handleDeleteNote(selectedNoteData._id);
                   handleCloseDialog();
+                }}
+                sx={{ 
+                  textTransform: 'none',
+                  fontWeight: 600,
+                  px: 3
                 }}
               >
                 Delete
