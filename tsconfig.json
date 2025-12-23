@@ -1,0 +1,74 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+        "target": "es2019",
+        "lib": [
+            "es2019"
+        ],
+        "typeRoots": [
+            "node_modules/@types"
+        ],
+        "allowSyntheticDefaultImports": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "forceConsistentCasingInFileNames": true,
+        "moduleResolution": "node",
+        "module": "commonjs",
+        "noImplicitAny": true,
+        "pretty": true,
+        "sourceMap": true,
+        "declaration": true,
+        "outDir": "dist",
+        "allowJs": true,
+        "noEmit": false,
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "importHelpers": true,
+        "diagnostics": true,
+        "skipLibCheck": true,
+        "listEmittedFiles": true,
+        "maxNodeModuleJsDepth": 1,
+        "strict": true,
+        "strictNullChecks": true,
+        "baseUrl": "./app",
+        "paths": {
+            "@/*": [
+                "./*"
+            ],
+            "@config/*": [
+                "config/*"
+            ],
+            "@common/*": [
+                "common/*"
+            ],
+            "@controllers/*": [
+                "controllers/*"
+            ],
+            "@models/*": [
+                "models/*"
+            ],
+            "@routes/*": [
+                "routes/*"
+            ],
+            "@services/*": [
+                "services/*"
+            ],
+            "@utils/*": [
+                "utils/*"
+            ],
+            "@middlewares/*": [
+                "common/middlewares/*"
+            ],
+            "@interfaces/*": [
+                "common/interfaces/*"
+            ]
+        }
+    },
+    "include": [
+        "app/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}
